@@ -20,7 +20,7 @@ public class Member {
     @Column(name = "password", length = 100)
     private String password;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne( fetch = LAZY, optional = false)
     @JoinColumn(name = "dept_id")
     private Department department;
 

@@ -3,6 +3,7 @@ package com.demo.service;
 import com.demo.domain.Member;
 import com.demo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +14,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
 
+    @Autowired
+    private final MemberRepository memberRepository;
 
-    private final MemberRepository memberRepositroy;
+    //회원 전체 조회
+    public List<Member> findMembers(){
+        return memberRepository.findAll();
+    }
 
     @Transactional
     public void save(Member member) {
 
-        List<Member> memberList = memberRepositroy.findByEmail(member.getEmail());
+        List<Member> memberList = memberRepository.findByEmail(member.getEmail());
         memberAlreadyJoinChecked(memberList);
 
-        memberRepositroy.save(member);
+        memberRepository.save(member);
     }
 
     private void memberAlreadyJoinChecked(List<Member> memberList) {

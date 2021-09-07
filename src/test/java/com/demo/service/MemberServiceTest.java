@@ -23,5 +23,6 @@ class MemberServiceTest {
 
     @Test
     void save() {
+
     }
 }
